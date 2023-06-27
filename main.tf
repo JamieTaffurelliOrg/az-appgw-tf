@@ -63,7 +63,9 @@ resource "azurerm_monitor_diagnostic_setting" "public_ip_diagnostics" {
 }
 
 resource "azurerm_application_gateway" "appgw" {
-  #checkov:skip=CKV_AZURE_120:Public automation account may be unavoidable
+  #checkov:skip=CKV_AZURE_120:WAF may be enabled elsewhere
+  #checkov:skip=CKV_AZURE_217:Redirects to Https can be used
+  #checkov:skip=CKV_AZURE_218:Optionality on SSL policy is required
   name                              = var.app_gateway_name
   resource_group_name               = var.resource_group_name
   location                          = var.location
