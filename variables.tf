@@ -58,6 +58,12 @@ variable "force_firewall_policy_association" {
   description = "Force WAF association"
 }
 
+variable "firewall_policy_id" {
+  type        = string
+  default     = null
+  description = "WAF policy ID"
+}
+
 variable "sku_name" {
   type        = string
   default     = "WAF_v2"
@@ -308,23 +314,6 @@ variable "url_path_maps" {
   description = "URL path maps"
 }
 
-/*variable "waf_configuration" {
-  type = object(
-    {
-      enabled                  = waf_configuration.value["enabled"]
-      firewall_mode            = waf_configuration.value["firewall_mode"]
-      rule_set_type            = waf_configuration.value["rule_set_type"]
-      rule_set_version         = waf_configuration.value["rule_set_version"]
-      disabled_rule_group      = waf_configuration.value["disabled_rule_group"]
-      file_upload_limit_mb     = waf_configuration.value["file_upload_limit_mb"]
-      request_body_check       = waf_configuration.value["request_body_check"]
-      max_request_body_size_kb = waf_configuration.value["max_request_body_size_kb"]
-      exclusion                = waf_configuration.value["exclusion"]
-    }
-  ))
-  description = "Public IP addresses"
-}*/
-
 variable "custom_error_configurations" {
   type = list(object(
     {
@@ -356,10 +345,6 @@ variable "autoscale_configuration" {
       response_buffering_enabled = optional(number, 10)
     }
   )
-  default = {
-    request_buffering_enabled  = 2
-    response_buffering_enabled = 10
-  }
   description = "Autoscale settings"
 }
 
