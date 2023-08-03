@@ -73,6 +73,7 @@ resource "azurerm_application_gateway" "appgw" {
   zones                             = var.zones
   enable_http2                      = var.enable_http2
   force_firewall_policy_association = var.force_firewall_policy_association
+  firewall_policy_id                = var.firewall_policy_id
 
   sku {
     name     = var.sku_name
@@ -268,7 +269,7 @@ resource "azurerm_application_gateway" "appgw" {
   }
 
   dynamic "url_path_map" {
-    for_each = { for k in var.url_path_maps : k.name => k }
+    for_each = { for k in var.url_path_maps : k.name => k if k != null }
 
     content {
       name                                = url_path_map.key
@@ -292,22 +293,6 @@ resource "azurerm_application_gateway" "appgw" {
       }
     }
   }
-
-  /*dynamic "waf_configuration" {
-    for_each = var.waf_configuration != null ? var.waf_configuration : {}
-
-    content {
-      enabled                  = optional(bool, true)
-      firewall_mode            = optional(string, "Prevention")
-      rule_set_type            = optional(string, "OWASP")
-      rule_set_version         = optional(string, "3.2")
-      disabled_rule_group      = optional(list(string))
-      file_upload_limit_mb     = optional(number)
-      request_body_check       = optional(bool, true)
-      max_request_body_size_kb = optional(number)
-      exclusion                = optional(list(string))
-    }
-  }*/
 
   dynamic "custom_error_configuration" {
     for_each = { for k in var.custom_error_configurations : k.status_code => k if k != null }
