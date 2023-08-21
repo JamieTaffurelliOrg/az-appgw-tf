@@ -238,6 +238,7 @@ variable "ssl_profiles" {
       min_protocol_version             = optional(string)
     }
   ))
+  default     = []
   description = "SSL configurations"
 }
 
@@ -248,6 +249,7 @@ variable "authentication_certificates" {
       data = string
     }
   ))
+  default     = []
   description = "Authentication certificates"
 }
 
@@ -258,6 +260,7 @@ variable "trusted_root_certificates" {
       key_vault_secret_id = string
     }
   ))
+  default     = []
   description = "Root certificates"
 }
 
@@ -287,6 +290,7 @@ variable "ssl_certificates" {
       key_vault_secret_id = string
     }
   ))
+  default     = []
   description = "Front end certificates"
 }
 
@@ -311,6 +315,7 @@ variable "url_path_maps" {
       ))
     }
   ))
+  default     = []
   description = "URL path maps"
 }
 
@@ -321,6 +326,7 @@ variable "custom_error_configurations" {
       custom_error_page_url = string
     }
   ))
+  default     = []
   description = "Custom error pages"
 }
 
@@ -335,6 +341,7 @@ variable "redirect_configurations" {
       include_query_string = optional(bool, false)
     }
   ))
+  default     = []
   description = "URL redirects"
 }
 
@@ -388,6 +395,7 @@ variable "rewrite_rule_sets" {
       ))
     }
   ))
+  default     = []
   description = "URL rewrite rule sets"
 }
 
