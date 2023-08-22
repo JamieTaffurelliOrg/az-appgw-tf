@@ -103,8 +103,8 @@ resource "azurerm_application_gateway" "appgw" {
 
     content {
       name                          = frontend_ip_configuration.key
-      public_ip_address_id          = azurerm_public_ip.appgw_public_ip[(frontend_ip_configuration.value["public_ip_address_reference"])].id
-      subnet_id                     = data.azurerm_subnet.appgw_subnet[(frontend_ip_configuration.value["subnet_reference"])].id
+      public_ip_address_id          = frontend_ip_configuration.value["public_ip_address_reference"] == null ? null : azurerm_public_ip.appgw_public_ip[(frontend_ip_configuration.value["public_ip_address_reference"])].id
+      subnet_id                     = frontend_ip_configuration.value["subnet_reference"] == null ? null : data.azurerm_subnet.appgw_subnet[(frontend_ip_configuration.value["subnet_reference"])].id
       private_ip_address            = frontend_ip_configuration.value["private_ip_address"]
       private_ip_address_allocation = frontend_ip_configuration.value["private_ip_address_allocation"]
     }
