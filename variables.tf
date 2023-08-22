@@ -152,7 +152,7 @@ variable "backend_http_settings" {
       port                                = number
       protocol                            = optional(string, "Https")
       request_timeout                     = optional(number, 30)
-      trusted_root_certificate_names      = optional(string)
+      trusted_root_certificate_names      = optional(list(string))
       connection_draining_enabled         = optional(bool, true)
       drain_timeout_sec                   = optional(number, 30)
       authentication_certificates         = optional(list(string), [])
@@ -172,7 +172,7 @@ variable "http_listeners" {
       require_sni                    = optional(bool, false)
       firewall_policy_id             = optional(string)
       ssl_profile_name               = optional(string)
-      custom_error_configuration = optional(list(object(
+      custom_error_configurations = optional(list(object(
         {
           status_code           = number
           custom_error_page_url = string
