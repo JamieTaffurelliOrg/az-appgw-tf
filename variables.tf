@@ -348,8 +348,8 @@ variable "redirect_configurations" {
 variable "autoscale_configuration" {
   type = object(
     {
-      min_capacity               = optional(number, 2)
-      response_buffering_enabled = optional(number, 10)
+      min_capacity = optional(number, 2)
+      max_capacity = optional(number, 10)
     }
   )
   description = "Autoscale settings"
