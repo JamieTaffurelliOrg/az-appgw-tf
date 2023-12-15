@@ -21,44 +21,22 @@ resource "azurerm_monitor_diagnostic_setting" "public_ip_diagnostics" {
   target_resource_id         = azurerm_public_ip.appgw_public_ip[(each.key)].id
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.logs.id
 
-  log {
+  enabled_log {
     category = "DDoSProtectionNotifications"
-    enabled  = true
 
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
-  log {
+  enabled_log {
     category = "DDoSMitigationFlowLogs"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
-  log {
+  enabled_log {
     category = "DDoSMitigationReports"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
   metric {
     category = "AllMetrics"
     enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 }
 
@@ -390,43 +368,20 @@ resource "azurerm_monitor_diagnostic_setting" "appgw_diagnostics" {
   target_resource_id         = azurerm_application_gateway.appgw.id
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.logs.id
 
-  log {
+  enabled_log {
     category = "ApplicationGatewayAccessLog"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
-  log {
+  enabled_log {
     category = "ApplicationGatewayPerformanceLog"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
-  log {
+  enabled_log {
     category = "ApplicationGatewayFirewallLog"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 
   metric {
     category = "AllMetrics"
     enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 365
-    }
   }
 }
